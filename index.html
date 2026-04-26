@@ -17,73 +17,27 @@
                         secondaryText: '#4A5568',
                         accentDark: '#2F4F4F',
                         accentLight: '#8FBC8F',
-                        ratingHigh: '#48BB78',
-                        ratingMid: '#ECC94B'
                     },
-                    fontFamily: {
-                        sans: ['system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
-                    }
                 }
             }
         }
     </script>
     <style>
-        body {
-            background-color: #F7F5F0;
-            color: #2D3748;
-        }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 300px;
-            max-height: 400px;
-        }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 350px;
-            }
-        }
-        .radar-container {
-            position: relative;
-            width: 100%;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 40vh;
-            min-height: 350px;
-            max-height: 500px;
-        }
-        .card-active {
-            border-color: #2F4F4F;
-            box-shadow: 0 10px 15px -3px rgba(47, 79, 79, 0.2);
-            transform: scale(1.02);
-            background-color: #F0F4F4;
-        }
-        .fade-in {
-            animation: fadeIn 0.4s ease-in-out forwards;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .gallery-image {
-            transition: opacity 0.3s ease-in-out;
-        }
+        body { background-color: #F7F5F0; color: #2D3748; }
+        .radar-container { position: relative; width: 100%; max-width: 700px; margin: auto; height: 40vh; min-height: 350px; }
+        .card-active { border-color: #2F4F4F; box-shadow: 0 10px 15px -3px rgba(47, 79, 79, 0.2); transform: scale(1.02); background-color: #F0F4F4; }
+        .fade-in { animation: fadeIn 0.4s ease-in-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .gallery-image { transition: opacity 0.3s ease-in-out; }
     </style>
 </head>
 <body class="font-sans antialiased text-primaryText min-h-screen">
 
-<!-- Chosen Palette: Warm Neutrals with Slate/Sage Accents (F7F5F0, 2F4F4F, 8FBC8F) -->
-<!-- Application Structure Plan: Interactive explorer for the Röpke family. Features a Comparison Dashboard (Radar Chart) and a Destination Grid. Selecting a destination triggers a detailed "Exploration Mode" with a visual gallery, activity logs, weather data, and logistics. This version ensures unique, curated image sets for each location and robust gallery cycling. -->
-<!-- Visualization & Content Choices: 
-1. Radar Chart (Chart.js) -> Global destination profiling.
-2. Photo Gallery (Custom JS) -> Curated 3-image cycle with location-specific Unsplash IDs.
-3. Destination Flipper -> Linear navigation (Next/Prev) to the detail view.
-4. Weather Range Chart -> Visualizing climate extremes for June.
-CONFIRMING NO SVG/Mermaid used. -> -->
+<!-- Chosen Palette: Warm Neutrals with Slate/Sage Accents -->
+<!-- Application Structure Plan: Interactive explorer for the Röpke family trip. 
+     This version restores the rich textual analysis for physical and cultural categories while 
+     simplifying the climate section to a minimalist icon-based display. 
+     It uses two high-quality user-provided images per location for a focused visual tour. -->
 <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -92,9 +46,9 @@ CONFIRMING NO SVG/Mermaid used. -> -->
         <div class="inline-block px-4 py-1 mb-4 rounded-full bg-accentLight/20 text-accentDark text-sm font-bold tracking-widest uppercase">
             Family Holiday Planner 2026
         </div>
-        <h1 class="text-4xl md:text-6xl font-extrabold text-accentDark mb-4 tracking-tight">Röpke Family Getaway</h1>
-        <p class="text-lg md:text-xl text-secondaryText max-w-3xl mx-auto">
-            Reviewing our top wild and active destinations for <span class="text-accentDark font-semibold">June 13th – 21st, 2026</span>.
+        <h1 class="text-4xl md:text-6xl font-extrabold text-accentDark mb-4 tracking-tight text-center">Röpke Family Getaway</h1>
+        <p class="text-lg md:text-xl text-secondaryText max-w-3xl mx-auto text-center">
+            Reviewing our top wild and active destinations for <span class="text-accentDark font-semibold text-center">June 13th – 21st, 2026</span>.
         </p>
     </header>
 
@@ -116,9 +70,8 @@ CONFIRMING NO SVG/Mermaid used. -> -->
     <!-- Detail Section -->
     <section id="detail-section" class="hidden bg-neutralCard rounded-3xl shadow-2xl border border-stone-200 mt-12 overflow-hidden fade-in">
         
-        <!-- Image Exploration Header -->
         <div class="relative h-[400px] md:h-[550px] bg-stone-900 group">
-            <img id="gallery-main" src="" alt="Destination" class="w-full h-full object-cover opacity-80 gallery-image" onerror="this.src='https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=1200'">
+            <img id="gallery-main" src="" alt="Destination" class="w-full h-full object-cover opacity-80 gallery-image">
             <div class="absolute inset-0 bg-gradient-to-t from-stone-900 via-stone-900/10 to-transparent"></div>
             
             <div class="absolute bottom-10 left-10 right-10">
@@ -141,40 +94,37 @@ CONFIRMING NO SVG/Mermaid used. -> -->
                 <span class="p-4 rounded-full bg-white/10 backdrop-blur-md text-white group-hover/btn:scale-110 transition-transform">&#10095;</span>
             </button>
             
-            <!-- Image Counter -->
             <div class="absolute top-6 right-6 px-4 py-2 bg-black/40 backdrop-blur-md rounded-full text-white text-xs font-bold uppercase tracking-widest z-20 border border-white/20">
-                Visual exploration: <span id="gallery-index">1</span> / <span id="gallery-total">3</span>
+                Visual exploration: <span id="gallery-index">1</span> / <span id="gallery-total">2</span>
             </div>
         </div>
 
         <div class="p-6 md:p-12">
             <div class="flex flex-col lg:flex-row gap-12">
-                
                 <div class="w-full lg:w-3/5 space-y-10">
                     <div>
-                        <div class="flex items-center justify-between mb-4 border-b-2 border-accentLight/20 pb-4">
+                        <div class="mb-4 border-b-2 border-accentLight/20 pb-4 flex justify-between items-end">
                             <h3 class="text-2xl font-bold text-accentDark">Active Highlights</h3>
                         </div>
                         <p id="detail-phys-text" class="text-lg leading-relaxed text-primaryText mb-6"></p>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div class="bg-stone-50 p-5 rounded-2xl border border-stone-100 shadow-sm">
-                                <span class="block text-xs font-bold text-accentDark uppercase tracking-wider mb-2">Must Do</span>
+                                <span class="block text-xs font-bold text-accentDark uppercase tracking-wider mb-2">Activities</span>
                                 <p id="detail-phys-examples" class="text-sm text-secondaryText leading-snug italic"></p>
                             </div>
                             <div class="bg-stone-50 p-5 rounded-2xl border border-stone-100 shadow-sm">
-                                <span class="block text-xs font-bold text-accentDark uppercase tracking-wider mb-2">Local Activity</span>
+                                <span class="block text-xs font-bold text-accentDark uppercase tracking-wider mb-2">Wild Swim / Bonus</span>
                                 <p id="detail-phys-local" class="text-sm text-secondaryText leading-snug"></p>
                             </div>
                         </div>
                     </div>
 
                     <div>
-                        <div class="flex items-center justify-between mb-4 border-b-2 border-accentLight/20 pb-4">
+                        <div class="mb-4 border-b-2 border-accentLight/20 pb-4">
                             <h3 class="text-2xl font-bold text-accentDark">Cultural Immersion</h3>
                         </div>
                         <p id="detail-cult-text" class="text-lg leading-relaxed text-primaryText mb-6"></p>
-                        <div class="bg-blue-50/50 p-6 rounded-2xl border border-blue-100 italic text-blue-900" id="detail-cult-extra">
-                        </div>
+                        <div class="bg-blue-50/50 p-6 rounded-2xl border border-blue-100 italic text-blue-900" id="detail-cult-extra"></div>
                     </div>
 
                     <div class="p-6 bg-orange-50/30 rounded-2xl border border-orange-100">
@@ -187,18 +137,28 @@ CONFIRMING NO SVG/Mermaid used. -> -->
                 </div>
 
                 <div class="w-full lg:w-2/5 space-y-8">
+                    <!-- Simplified Climate Card -->
                     <div class="bg-white p-8 rounded-3xl border border-stone-200 shadow-sm">
                         <h3 class="text-xl font-bold text-accentDark mb-6 flex items-center gap-2">
                             <span>🌡️</span> Climate (June)
                         </h3>
-                        <div class="chart-container">
-                            <canvas id="tempChart"></canvas>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-amber-50 p-4 rounded-2xl border border-amber-100 text-center">
+                                <span class="text-3xl block mb-2">☀️</span>
+                                <span class="text-xs font-bold text-amber-800 uppercase tracking-widest block">Day</span>
+                                <span id="temp-day" class="text-2xl font-black text-amber-900"></span>
+                            </div>
+                            <div class="bg-indigo-50 p-4 rounded-2xl border border-indigo-100 text-center">
+                                <span class="text-3xl block mb-2">🌙</span>
+                                <span class="text-xs font-bold text-indigo-800 uppercase tracking-widest block">Night</span>
+                                <span id="temp-night" class="text-2xl font-black text-indigo-900"></span>
+                            </div>
                         </div>
+                        <p class="text-xs text-secondaryText mt-4 italic text-center" id="temp-note"></p>
                     </div>
 
                     <div class="bg-accentDark p-8 rounded-3xl text-white shadow-xl">
                         <h3 class="text-xl font-bold mb-6">Trip Logistics</h3>
-                        
                         <div class="space-y-6">
                             <div>
                                 <div class="flex justify-between items-center mb-1">
@@ -210,7 +170,6 @@ CONFIRMING NO SVG/Mermaid used. -> -->
                                 </div>
                                 <p id="detail-tour-text" class="text-sm text-white/70"></p>
                             </div>
-
                             <div class="pt-4 border-t border-white/10">
                                 <span class="block text-xs font-bold text-accentLight uppercase tracking-widest mb-2">Transport Advice</span>
                                 <p id="detail-transport" class="text-sm leading-relaxed"></p>
@@ -220,7 +179,6 @@ CONFIRMING NO SVG/Mermaid used. -> -->
                 </div>
             </div>
 
-            <!-- Flipper Navigation -->
             <div class="mt-12 pt-8 border-t-2 border-stone-100 flex flex-col md:flex-row justify-between items-center gap-6">
                 <button onclick="changeDestination(-1)" class="w-full md:w-auto px-8 py-4 rounded-2xl bg-stone-100 text-accentDark font-bold hover:bg-stone-200 transition-colors flex items-center justify-center gap-2">
                     &larr; Previous Destination
@@ -250,23 +208,22 @@ CONFIRMING NO SVG/Mermaid used. -> -->
             vibe: 'Hawaii meets Jurassic Park in the Mid-Atlantic.',
             scores: { physical: 10, cultural: 8, food: 8, wildness: 7 },
             images: [
-                'https://images.unsplash.com/photo-1589136142558-94c8396724d1?auto=format&fit=crop&q=80&w=1200', // Sete Cidades
-                'https://images.unsplash.com/photo-1542151608-540c491295b2?auto=format&fit=crop&q=80&w=1200', // Lush coast
-                'https://images.unsplash.com/photo-1571439241088-37c2275f11df?auto=format&fit=crop&q=80&w=1200'  // Waterfall
+                'https://static.wixstatic.com/media/32595b_1ab991b3bc3f4c9babb4a05a231c7de0~mv2.jpeg/v1/fill/w_1000,h_562,al_c,q_85,usm_0.66_1.00_0.01/32595b_1ab991b3bc3f4c9babb4a05a231c7de0~mv2.jpeg',
+                'https://www.visit-azoren.de/wp-content/uploads/2024/01/Sao-Miguel6.jpg'
             ],
-            physical: {
-                text: 'Canyoning through jungle waterfalls, whale watching, and hiking volcanic ridges offer a 360-degree experience.',
-                examples: 'Kayaking Twin Lakes, trekking Praia da Viola.',
-                local: 'Sulphur-rich mud baths provide therapeutic active recovery.'
+            physical: { 
+                text: 'The island is a natural playground. Start with canyoning in Ribeira dos Caldeirões (rappelling down waterfalls), move to whale watching out of Ponta Delgada, and end with a volcanic trek around Sete Cidades. The landscape is steep, lush, and constantly changing.', 
+                examples: 'Kayaking Twin Lakes, surfing Ribeira Grande, trekking Praia da Viola.', 
+                local: 'The Terra Nostra thermal baths: warm, iron-rich waters in a 200-year-old jungle garden.' 
             },
-            cultural: {
-                text: '50th Anniversary of Autonomy in 2026. Expect massive street parades and communal "Holy Spirit" feasts.',
-                extra: 'Fun fact: Europe\'s only commercial tea plantations thrive here.'
+            cultural: { 
+                text: '2026 is the 50th Anniversary of Regional Autonomy. Mid-June is exceptionally festive with "Sanjoaninas" street parades, traditional folk music, and communal feasts.', 
+                extra: 'Visit the Gorreana Tea Factory—Europe\'s only commercial tea plantation—to see 19th-century machinery still in use.' 
             },
-            food: 'Cozido (volcanic-steamed stew), grilled limpets, and world-class grass-fed cheeses.',
-            tourism: { text: 'Moderately wild. Towns will be festive, but mountain trails remain secluded.' },
+            food: 'Defined by Cozido (volcanic-steamed stew buried in the ground), grilled limpets, and world-class grass-fed cheeses.',
+            tourism: { text: 'Moderately wild. Towns will be festive for the 2026 anniversary, but mountain trails remain remarkably secluded.' },
             transport: 'Strongly recommended: Rental Car. Essential for reaching remote crater lakes and jungle baths.',
-            temps: { labels: ['Night', 'Day'], ranges: [[15, 17], [20, 23]] }
+            temps: { day: '20-23°C', night: '15-17°C', note: 'Famous for "4 seasons in a day." Expect mist and sun in equal measure.' }
         },
         {
             id: 'montenegro',
@@ -276,23 +233,22 @@ CONFIRMING NO SVG/Mermaid used. -> -->
             vibe: 'Sharp limestone peaks meeting a deep Adriatic fjord.',
             scores: { physical: 9, cultural: 7, food: 7, wildness: 8 },
             images: [
-                'https://images.unsplash.com/photo-1555931035-621773d72665?auto=format&fit=crop&q=80&w=1200', // Kotor Bay
-                'https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?auto=format&fit=crop&q=80&w=1200', // Durmitor
-                'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&q=80&w=1200'  // Perast
+                'https://b3992170.smushcdn.com/3992170/wp-content/uploads/2025/06/Durmitor-Feat-1200x900.jpg?lossy=2&strip=1&webp=1',
+                'https://i0.wp.com/brosaroundtheglobe.com/wp-content/uploads/2024/04/kotor-summer-europe-travel-scaled.jpg?fit=2560,1920&ssl=1'
             ],
-            physical: {
-                text: 'High-speed rafting in Europe\'s deepest canyon (Tara) vs vertical rock climbing overlooking the sea.',
-                examples: 'Canyoning in Nevidio, kayaking "Our Lady of the Rocks".',
-                local: 'The "Peaks of the Balkans" offers true wilderness hiking without the Alpine crowds.'
+            physical: { 
+                text: 'Extreme variety. High-speed rafting in the Tara River Canyon (Europe\'s deepest) contrasts with technical Via Ferratas in Kotor. The "Peaks of the Balkans" offers rugged, unmanicured trails for pure wilderness exploration.', 
+                examples: 'Canyoning in Nevidio, mountain biking the Durmitor Ring, sea kayaking Perast.', 
+                local: 'Blue Eye hike: trek to deep, icy-cold karst springs for a "wild swim" in the Accursed Mountains.' 
             },
-            cultural: {
-                text: 'Venetian architecture on the coast meets ancient shepherd traditions in the high mountains.',
-                extra: 'Visit Ostrog Monastery—a holy site carved entirely into a vertical cliff wall.'
+            cultural: { 
+                text: 'A mix of Venetian coastal elegance and rugged highland shepherd traditions. Spend mornings in UNESCO Old Towns and evenings in a "Katun" learning about ancient honor codes.', 
+                extra: 'Visit Ostrog Monastery—a 17th-century holy site carved entirely into a vertical cliff wall overlooking the Zeta valley.' 
             },
-            food: 'Contrast between coastal black risotto and highland clotted cream with slow-roasted lamb.',
-            tourism: { text: 'Very wild in the north. Durmitor is one of the quietest ranges in Europe.' },
-            transport: 'A 4x4 vehicle is best for navigating mountain passes and gravel tracks.',
-            temps: { labels: ['Mountains', 'Coast'], ranges: [[15, 22], [24, 28]] }
+            food: 'Contrast between coastal black ink risotto and highland clotted cream (Kaymak) with slow-roasted mountain lamb.',
+            tourism: { text: 'Very wild in the north. Kotor is busy, but Durmitor remains one of the quietest mountain ranges in Europe.' },
+            transport: 'A 4x4 vehicle is best for navigating mountain passes and unpaved gravel tracks in Durmitor.',
+            temps: { day: '24-28°C', night: '15-22°C', note: 'Significant drop in temperature when moving from the coast to the northern mountains.' }
         },
         {
             id: 'dolomites',
@@ -302,23 +258,22 @@ CONFIRMING NO SVG/Mermaid used. -> -->
             vibe: 'Coral-stone cathedrals rising from emerald meadows.',
             scores: { physical: 10, cultural: 8, food: 10, wildness: 6 },
             images: [
-                'https://images.unsplash.com/photo-1533550822825-242eedb36873?auto=format&fit=crop&q=80&w=1200', // Seceda
-                'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&q=80&w=1200', // Braies
-                'https://images.unsplash.com/photo-1531315630201-bb15fbeb866d?auto=format&fit=crop&q=80&w=1200'  // Tre Cime
+                'https://wildlandtrekking.com/content/uploads/2022/10/Dolomites-boats.png',
+                'https://travelandspa.it/wp-content/uploads/2023/07/Tre-Cime-strada-nicola-bombassei-1750-1024x684.jpg'
             ],
-            physical: {
-                text: 'Scale massive vertical faces on Via Ferratas or conquer the 58km Sella Ronda loop on E-MTBs.',
-                examples: 'Seceda Ridgeline hike, Brigata Tridentina climb.',
-                local: 'Extensive cable car networks provide easy access to 2,500m "balcony" walks.'
+            physical: { 
+                text: 'World capital of Via Ferrata. Scale massive vertical faces with ladders and cables. E-Mountain Biking is unmatched, with the Sella Ronda loop offering 58km of epic trails through high-speed gondola access.', 
+                examples: 'Seceda Ridgeline hike, Brigata Tridentina climb, Alpe di Siusi trail running.', 
+                local: 'Take the first cable car to Seceda at 8:00 AM to experience the "shark teeth" peaks in total silence.' 
             },
-            cultural: {
-                text: 'Ladin heritage meets Tyrolean traditions. The HERO race in mid-June turns the valley into a festival.',
-                extra: 'Mountain "Rifugio" culture—lunching at high-altitude huts—is a mandatory ritual.'
+            cultural: { 
+                text: 'Ladin heritage (a unique language) meets Tyrolean heartiness. Mid-June hosts the HERO Dolomites race, turning villages into festive mountain hubs.', 
+                extra: 'Rifugio culture: Lunching at 2,000m huts is a pillar of life here—expect Michelin-quality food in hiking boots.' 
             },
-            food: 'High-end fusion of Austrian heartiness and Italian refinement; Michelin-starred huts.',
-            tourism: { text: 'Managed wild. World-class infrastructure keeps trails feeling spacious.' },
-            transport: 'Public transport winner. Efficient trains and buses make cars unnecessary.',
-            temps: { labels: ['Peaks', 'Valley'], ranges: [[8, 15], [20, 25]] }
+            food: 'High-end fusion of Austrian dumplings (Canederli) and Italian refinement; focused on local Speck and aged Alpine cheeses.',
+            tourism: { text: 'Managed wild. World-class infrastructure keeps trails feeling spacious even when villages are lively.' },
+            transport: 'Public transport winner. Efficient trains and buses make cars unnecessary with the Südtirol Mobil card.',
+            temps: { day: '20-25°C', night: '8-15°C', note: 'Peak temperatures can stay quite cold; expect leftover winter snow in high-altitude crevices.' }
         },
         {
             id: 'corsica',
@@ -328,28 +283,26 @@ CONFIRMING NO SVG/Mermaid used. -> -->
             vibe: 'The granite-spined mountain in the middle of the sea.',
             scores: { physical: 10, cultural: 9, food: 9, wildness: 7 },
             images: [
-                'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&q=80&w=1200', // Bonifacio
-                'https://images.unsplash.com/photo-1538332576228-eb5b4c4de6ee?auto=format&fit=crop&q=80&w=1200', // Beach
-                'https://images.unsplash.com/photo-1549405234-917724281781?auto=format&fit=crop&q=80&w=1200'  // Granite Interior
+                'https://ik.imgkit.net/3vlqs5axxjf/TAW/ik-seo/uploadedImages/All_Gateways/Europe/Features/Bastia_Corsica/A-Travel-Guide-to-Corsica-France.jpg?tr=w-1008,h-567,fo-auto',
+                'https://cdn.britannica.com/05/65205-050-6458CBA2/Mountains-Corsica-town-Montemaggiore-France-terrain.jpg'
             ],
-            physical: {
-                text: 'Tackle the legendary GR20 trek or kayak the red-rock Scandola Reserve, only accessible by water.',
-                examples: 'Diving Lavezzi Islands, canyoning Bavella Needles.',
-                local: 'River trekking here involves jumping into crystal glacial pools in the granite interior.'
+            physical: { 
+                text: 'Home to the GR20, Europe\'s toughest trek. Hike segments of the granite spine or kayak the red-rock Scandola Reserve, accessible only by water. River trekking in the Restonica valley involves swimming in glacial pools.', 
+                examples: 'Diving Lavezzi Islands, canyoning Bavella Needles, coastal hiking Genovese towers.', 
+                local: 'River scrambling: Scramble up the Restonica Valley jumping into deep glacial "rock baths" only found in the interior.' 
             },
-            cultural: {
-                text: 'Haunting polyphonic singing and solstice fires on the beaches.',
-                extra: 'On June 20th, the Fête de la Saint-Jean brings massive bonfires to every town.'
+            cultural: { 
+                text: 'Fiercely independent spirit. Experience polyphonic singing (haunting A Cappella) and the "Fête de la Saint-Jean" beach bonfires on June 20th.', 
+                extra: 'The "Maquis"—a wild shrubland of rosemary, myrtle, and thyme—scents the entire island during the June heat.' 
             },
-            food: 'Rustic and wild. Free-roaming pigs result in world-class chestnut-flavored charcuterie.',
-            tourism: { text: 'Ruggedly wild. Interior Corsica remains ancient even as the coast gets active.' },
-            transport: 'Rental car mandatory. Winding "Corniche" roads are scenic and challenging.',
-            temps: { labels: ['Mountains', 'Coast'], ranges: [[12, 20], [23, 27]] }
+            food: 'Rustic and wild. Chestnut-fed free-roaming pigs result in world-class charcuterie and unique chestnut-flour beers.',
+            tourism: { text: 'Ruggedly wild. Interior Corsica remains ancient and slow-paced even as the coast prepares for July.' },
+            transport: 'Rental car mandatory. Winding "Corniche" roads are a white-knuckle, scenic activity in themselves.',
+            temps: { day: '23-27°C', night: '12-20°C', note: 'Coastal weather is perfect Mediterranean summer; interior granite mountains can see quick storms.' }
         }
     ];
 
     let radarChartInstance = null;
-    let tempChartInstance = null;
     let currentImageIndex = 0;
     let currentDestinationImages = [];
     let currentDestId = null;
@@ -360,38 +313,10 @@ CONFIRMING NO SVG/Mermaid used. -> -->
             labels: ['Culture', 'Wildness', 'Food'],
             datasets: destinationData.map((dest, index) => {
                 const borders = ['#2F4F4F', '#8FBC8F', '#D2691E', '#4682B4'];
-                return {
-                    label: dest.shortName,
-                    data: [dest.scores.cultural, dest.scores.wildness, dest.scores.food],
-                    backgroundColor: 'transparent',
-                    borderColor: borders[index],
-                    pointBackgroundColor: borders[index],
-                    borderWidth: 3,
-                    pointRadius: 5
-                };
+                return { label: dest.shortName, data: [dest.scores.cultural, dest.scores.wildness, dest.scores.food], backgroundColor: 'transparent', borderColor: borders[index], pointBackgroundColor: borders[index], borderWidth: 3, pointRadius: 5 };
             })
         };
-
-        radarChartInstance = new Chart(ctx, {
-            type: 'radar',
-            data: data,
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    r: {
-                        angleLines: { color: 'rgba(0,0,0,0.1)' },
-                        grid: { color: 'rgba(0,0,0,0.1)' },
-                        pointLabels: { font: { size: 14, weight: 'bold' } },
-                        ticks: { stepSize: 2, display: false },
-                        min: 0, max: 10
-                    }
-                },
-                plugins: {
-                    legend: { position: 'bottom', labels: { padding: 30, usePointStyle: true } }
-                }
-            }
-        });
+        radarChartInstance = new Chart(ctx, { type: 'radar', data: data, options: { responsive: true, maintainAspectRatio: false, scales: { r: { angleLines: { color: 'rgba(0,0,0,0.1)' }, grid: { color: 'rgba(0,0,0,0.1)' }, pointLabels: { font: { size: 14, weight: 'bold' } }, ticks: { stepSize: 2, display: false }, min: 0, max: 10 } }, plugins: { legend: { position: 'bottom', labels: { padding: 30, usePointStyle: true } } } } });
     }
 
     function renderCards() {
@@ -400,12 +325,7 @@ CONFIRMING NO SVG/Mermaid used. -> -->
             const card = document.createElement('div');
             card.className = 'bg-white rounded-2xl shadow-sm border-2 border-transparent p-6 cursor-pointer transition-all duration-300 hover:border-accentLight text-center';
             card.dataset.id = dest.id;
-            card.innerHTML = `
-                <div class="text-4xl mb-4">${dest.icon}</div>
-                <h3 class="text-xl font-bold text-accentDark mb-1">${dest.shortName}</h3>
-                <p class="text-xs text-secondaryText mb-6 uppercase tracking-widest font-bold">Mid-June Outlook</p>
-                <div class="text-xs font-bold py-1 px-2 rounded-full bg-stone-100 text-stone-500 inline-block">Explore &rarr;</div>
-            `;
+            card.innerHTML = `<div class="text-4xl mb-4">${dest.icon}</div><h3 class="text-xl font-bold text-accentDark mb-1">${dest.shortName}</h3><p class="text-xs text-secondaryText mb-6 uppercase tracking-widest font-bold">Mid-June Outlook</p><div class="text-xs font-bold py-1 px-2 rounded-full bg-stone-100 text-stone-500 inline-block">Explore &rarr;</div>`;
             card.addEventListener('click', () => selectDestination(dest.id));
             grid.appendChild(card);
         });
@@ -436,77 +356,34 @@ CONFIRMING NO SVG/Mermaid used. -> -->
         document.getElementById('detail-tour-text').textContent = dest.tourism.text;
         document.getElementById('detail-transport').textContent = dest.transport;
 
+        // Update Climate Fields
+        document.getElementById('temp-day').textContent = dest.temps.day;
+        document.getElementById('temp-night').textContent = dest.temps.night;
+        document.getElementById('temp-note').textContent = dest.temps.note;
+
         updateGallery();
-        renderTempChart(dest.temps);
-        
         window.scrollTo({ top: document.getElementById('detail-section').offsetTop - 20, behavior: 'smooth' });
     }
 
     function updateGallery() {
         const img = document.getElementById('gallery-main');
         img.style.opacity = 0;
-        // Immediate switch but with simple opacity transition
         img.src = currentDestinationImages[currentImageIndex];
         img.onload = () => { img.style.opacity = 0.8; };
-        
         document.getElementById('gallery-index').textContent = currentImageIndex + 1;
         document.getElementById('gallery-total').textContent = currentDestinationImages.length;
     }
 
-    function nextImage(e) {
-        if(e) e.stopPropagation();
-        currentImageIndex = (currentImageIndex + 1) % currentDestinationImages.length;
-        updateGallery();
-    }
-
-    function prevImage(e) {
-        if(e) e.stopPropagation();
-        currentImageIndex = (currentImageIndex - 1 + currentDestinationImages.length) % currentDestinationImages.length;
-        updateGallery();
-    }
+    function nextImage(e) { if(e) e.stopPropagation(); currentImageIndex = (currentImageIndex + 1) % currentDestinationImages.length; updateGallery(); }
+    function prevImage(e) { if(e) e.stopPropagation(); currentImageIndex = (currentImageIndex - 1 + currentDestinationImages.length) % currentDestinationImages.length; updateGallery(); }
 
     function changeDestination(direction) {
         const currentIndex = destinationData.findIndex(d => d.id === currentDestId);
-        let nextIndex = currentIndex + direction;
-        if (nextIndex < 0) nextIndex = destinationData.length - 1;
-        if (nextIndex >= destinationData.length) nextIndex = 0;
+        let nextIndex = (currentIndex + direction + destinationData.length) % destinationData.length;
         selectDestination(destinationData[nextIndex].id);
     }
 
-    function renderTempChart(temps) {
-        if (tempChartInstance) tempChartInstance.destroy();
-        const ctx = document.getElementById('tempChart').getContext('2d');
-        tempChartInstance = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: temps.labels,
-                datasets: [{
-                    label: 'Range (°C)',
-                    data: temps.ranges,
-                    backgroundColor: 'rgba(143, 188, 143, 0.6)',
-                    borderColor: '#2F4F4F',
-                    borderWidth: 1,
-                    borderRadius: 8,
-                    barPercentage: 0.5
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                indexAxis: 'y',
-                scales: {
-                    x: { min: 0, max: 35, grid: { color: 'rgba(0,0,0,0.05)' } },
-                    y: { grid: { display: false }, ticks: { font: { weight: 'bold' } } }
-                },
-                plugins: { legend: { display: false } }
-            }
-        });
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        initRadarChart();
-        renderCards();
-    });
+    document.addEventListener('DOMContentLoaded', () => { initRadarChart(); renderCards(); });
 </script>
 </body>
 </html>
