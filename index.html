@@ -36,19 +36,19 @@
 
 <!-- Chosen Palette: Warm Neutrals with Slate/Sage Accents -->
 <!-- Application Structure Plan: Interactive dashboard for the Röpke family. 
-     This version uses "Search Query" formatted Google Flights URLs to force 
-     pre-filled searches for BER flights on June 13-21, 2026. 
+     This version includes 5 destinations (adding High Tatras, Poland).
+     It uses "Search Query" formatted Google Flights URLs for pre-filled searches.
      Maintains the restored descriptive text, 2-image gallery, and 3* hotel split logic. -->
 <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
     
     <header class="mb-12 text-center">
-        <div class="inline-block px-4 py-1 mb-4 rounded-full bg-accentLight/20 text-accentDark text-sm font-bold tracking-widest uppercase">
+        <div class="inline-block px-4 py-1 mb-4 rounded-full bg-accentLight/20 text-accentDark text-sm font-bold tracking-widest uppercase text-center">
             Family Holiday Planner 2026
         </div>
-        <h1 class="text-4xl md:text-6xl font-extrabold text-accentDark mb-4 tracking-tight">Röpke Family Getaway</h1>
-        <p class="text-lg md:text-xl text-secondaryText max-w-3xl mx-auto">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-accentDark mb-4 tracking-tight text-center">Röpke Family Getaway</h1>
+        <p class="text-lg md:text-xl text-secondaryText max-w-3xl mx-auto text-center">
             Reviewing our top wild and active destinations for <span class="text-accentDark font-semibold">June 13th – 21st, 2026</span>.
         </p>
     </header>
@@ -56,7 +56,7 @@
     <section class="mb-16 bg-neutralCard rounded-3xl shadow-sm p-6 md:p-10 border border-gray-200">
         <div class="mb-8 text-center">
             <h2 class="text-2xl font-bold text-accentDark">Comparison Overview</h2>
-            <p class="text-secondaryText mt-2">Check the balance of Culture, Wildness, and Food for our top picks.</p>
+            <p class="text-secondaryText mt-2 text-center">Check the balance of Culture, Wildness, and Food for our top picks.</p>
         </div>
         <div class="radar-container">
             <canvas id="comparisonChart"></canvas>
@@ -64,7 +64,7 @@
     </section>
 
     <section class="mb-12">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="destination-grid">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6" id="destination-grid">
         </div>
     </section>
 
@@ -129,7 +129,7 @@
                     </div>
 
                     <div class="p-6 bg-orange-50/30 rounded-2xl border border-orange-100">
-                        <div class="flex items-center gap-3 mb-3 text-orange-800">
+                        <div class="flex items-center gap-3 mb-2 text-orange-800">
                             <span class="text-2xl">🍲</span>
                             <h3 class="text-xl font-bold">Food Scene</h3>
                         </div>
@@ -145,12 +145,12 @@
                         </h3>
                         <div class="grid grid-cols-2 gap-4">
                             <div class="bg-amber-50 p-4 rounded-2xl border border-amber-100 text-center">
-                                <span class="text-3xl block mb-2">☀️</span>
+                                <span class="text-3xl block mb-2 text-center">☀️</span>
                                 <span class="text-xs font-bold text-amber-800 uppercase tracking-widest block">Day</span>
                                 <span id="temp-day" class="text-2xl font-black text-amber-900"></span>
                             </div>
                             <div class="bg-indigo-50 p-4 rounded-2xl border border-indigo-100 text-center">
-                                <span class="text-3xl block mb-2">🌙</span>
+                                <span class="text-3xl block mb-2 text-center">🌙</span>
                                 <span class="text-xs font-bold text-indigo-800 uppercase tracking-widest block">Night</span>
                                 <span id="temp-night" class="text-2xl font-black text-indigo-900"></span>
                             </div>
@@ -165,17 +165,17 @@
                         </h3>
                         <div class="space-y-6">
                             <div class="pb-4 border-b border-stone-200">
-                                <div class="flex justify-between items-center mb-1">
+                                <div class="flex justify-between items-center mb-1 text-center">
                                     <span class="text-xs font-bold text-secondaryText uppercase tracking-widest">BER Flight (Sat-Sat)</span>
-                                    <span id="cost-flight-range" class="font-bold text-accentDark"></span>
+                                    <span id="cost-flight-range" class="font-bold text-accentDark text-right"></span>
                                 </div>
                                 <button onclick="openFlights()" id="fetch-btn" class="mt-3 w-full text-[10px] font-bold uppercase tracking-wider bg-accentDark text-white py-3 rounded-xl hover:bg-opacity-90 transition-all flex items-center justify-center gap-2">
                                     Search Live on Google Flights
                                 </button>
                             </div>
-                            <div class="flex justify-between items-center pb-1">
+                            <div class="flex justify-between items-center">
                                 <span class="text-xs font-bold text-secondaryText uppercase tracking-widest">Hotel (Per Person / Day)</span>
-                                <span id="cost-hotel-range" class="font-bold text-accentDark"></span>
+                                <span id="cost-hotel-range" class="font-bold text-accentDark text-right"></span>
                             </div>
                         </div>
                         <p class="text-[9px] text-secondaryText mt-6 leading-tight italic text-center">Hotel rates based on 3* double room split. Flight includes 1 bag.</p>
@@ -185,7 +185,7 @@
                         <h3 class="text-xl font-bold mb-6">Trip Logistics</h3>
                         <div class="space-y-6">
                             <div>
-                                <div class="flex justify-between items-center mb-1">
+                                <div class="flex justify-between items-center mb-1 text-center">
                                     <span class="text-xs font-bold text-accentLight uppercase tracking-widest">Wildness Factor</span>
                                     <span id="detail-tour-score" class="font-black text-xl"></span>
                                 </div>
@@ -204,13 +204,13 @@
             </div>
 
             <div class="mt-12 pt-8 border-t-2 border-stone-100 flex flex-col md:flex-row justify-between items-center gap-6">
-                <button onclick="changeDestination(-1)" class="w-full md:w-auto px-8 py-4 rounded-2xl bg-stone-100 text-accentDark font-bold hover:bg-stone-200 transition-colors flex items-center justify-center gap-2">
+                <button onclick="changeDestination(-1)" class="w-full md:w-auto px-8 py-4 rounded-2xl bg-stone-100 text-accentDark font-bold hover:bg-stone-200 transition-colors">
                     &larr; Previous Destination
                 </button>
-                <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="text-secondaryText text-sm font-bold uppercase tracking-widest hover:text-accentDark transition-colors">
+                <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="text-secondaryText text-sm font-bold uppercase tracking-widest hover:text-accentDark">
                     Back to Selection
                 </button>
-                <button onclick="changeDestination(1)" class="w-full md:w-auto px-8 py-4 rounded-2xl bg-accentDark text-white font-bold hover:bg-stone-800 shadow-lg flex items-center justify-center gap-2">
+                <button onclick="changeDestination(1)" class="w-full md:w-auto px-8 py-4 rounded-2xl bg-accentDark text-white font-bold hover:bg-stone-800 shadow-lg">
                     Next Destination &rarr;
                 </button>
             </div>
@@ -218,7 +218,7 @@
     </section>
 
     <footer class="mt-20 pt-10 border-t border-stone-200 text-center">
-        <p class="text-secondaryText text-sm italic">Designed for the Röpke Family Adventure, June 2026.</p>
+        <p class="text-secondaryText text-sm italic text-center">Designed for the Röpke Family Adventure, June 2026.</p>
     </footer>
 </div>
 
@@ -236,16 +236,16 @@
                 'https://www.visit-azoren.de/wp-content/uploads/2024/01/Sao-Miguel6.jpg'
             ],
             physical: { 
-                text: 'The island is a natural playground. Start with canyoning in Ribeira dos Caldeirões (rappelling down waterfalls into pools), move to whale watching out of Ponta Delgada (June is peak season), and end with a volcanic trek around Sete Cidades.', 
+                text: 'The island is a natural playground. Start with canyoning in Ribeira dos Caldeirões (rappelling down waterfalls into pools), move to whale watching out of Ponta Delgada (June is peak season), and end with a volcanic trek around Sete Cidades. The landscape is steep, lush, and constantly changing.', 
                 examples: 'Kayaking Twin Lakes, surfing Ribeira Grande, trekking Praia da Viola.', 
                 local: 'The Terra Nostra thermal baths: warm, iron-rich waters in a 200-year-old tropical botanical garden.' 
             },
             cultural: { 
                 text: '2026 is the 50th Anniversary of Azorean Autonomy. Mid-June is exceptionally festive with "Sanjoaninas" street parades, traditional folk music, and massive communal "Holy Spirit" feasts.', 
-                extra: 'Visit the Gorreana Tea Factory—Europe\'s only commercial tea plantation—to see 19th-century machinery still powered by mountain water.' 
+                extra: 'Visit the Gorreana Tea Factory—Europe\'s only commercial tea plantation—to see 19th-century machinery still in use.' 
             },
             food: 'Defined by Cozido (volcanic-steamed stew buried in the ground), grilled limpets (Lapas), and world-class grass-fed island cheeses.',
-            tourism: { text: 'Moderately wild. Towns will be festive for the anniversary, but mountain trails remain secluded.' },
+            tourism: { text: 'Moderately wild. Towns will be festive for the anniversary, but mountain trails remain remarkably secluded.' },
             transport: 'Strongly recommended: Rental Car. Essential for reaching remote crater lakes and jungle baths.',
             temps: { day: '20-23°C', night: '15-17°C', note: 'Famous for "4 seasons in a day." Expect humidity and light rain.' },
             costs: { flight: '€420 - €580', hotel: '€55 - €80' },
@@ -290,7 +290,7 @@
                 'https://travelandspa.it/wp-content/uploads/2023/07/Tre-Cime-strada-nicola-bombassei-1750-1024x684.jpg'
             ],
             physical: { 
-                text: 'World capital of Via Ferrata. Scale massive vertical faces with ladders and cables. E-Mountain Biking is unmatched, with the Sella Ronda loop offering 58km of trails via high-speed gondola access.', 
+                text: 'World capital of Via Ferrata. Scale massive peaks using ladders and cables. E-Mountain Biking is unmatched, with the Sella Ronda loop offering 58km of trails via high-speed gondola access.', 
                 examples: 'Hiking the Seceda Ridgeline, climbing Brigata Tridentina, trail running on Alpe di Siusi.', 
                 local: 'First cable car to Seceda at 8:00 AM allows you to experience the "shark teeth" peaks in total silence.' 
             },
@@ -331,6 +331,33 @@
             temps: { day: '23-27°C', night: '12-20°C', note: 'Mediterranean coast weather vs interior mountains which see quick storms.' },
             costs: { flight: '€310 - €460', hotel: '€50 - €75' },
             flightsUrl: 'https://www.google.com/travel/flights?q=Flights%20from%20BER%20to%20BIA%20on%202026-06-13%20through%202026-06-21'
+        },
+        {
+            id: 'tatras',
+            icon: '🏔️',
+            shortName: 'High Tatras',
+            fullName: 'High Tatras, Poland',
+            vibe: 'Jagged granite peaks, emerald lakes, and rich highlander folklore.',
+            scores: { physical: 9, cultural: 9, food: 8, wildness: 6 },
+            images: [
+                'https://images.unsplash.com/photo-1579624505199-5f2ca030d315?auto=format&fit=crop&q=80&w=1200',
+                'https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?auto=format&fit=crop&q=80&w=1200'
+            ],
+            physical: { 
+                text: 'Poland\'s only alpine-style mountain range. Scale the granite spires of the High Tatras or explore the limestone caves of the Western Tatras. The trails are steep, rugged, and well-marked, leading to some of the most beautiful glacial lakes in Europe.', 
+                examples: 'Summiting Rysy (2,499m), hiking to Morskie Oko lake, scrambling the Orla Perć ridge.', 
+                local: 'Traditional wooden raft trip down the Dunajec River Gorge in the nearby Pieniny range.' 
+            },
+            cultural: { 
+                text: 'Immerse yourself in "Goral" (highlander) culture. The region is famous for its unique wooden architecture (Zakopane Style), vibrant folk music, and the sacred code of mountain hospitality.', 
+                extra: 'Try "Oscypek"—a protected traditional smoked cheese made from sheep\'s milk, often grilled with cranberry jam.' 
+            },
+            food: 'Hearty highlander cuisine: smoked sheep cheese, sour rye soup (Żurek), and "Moskole" (potato pancakes cooked on a griddle).',
+            tourism: { text: 'Managed wild. Zakopane can be crowded, but the high-altitude trails in the National Park offer plenty of space for serious hikers.' },
+            transport: 'Fly to Krakow (KRK) then take a 2-hour bus or rental car to Zakopane. Within the park, horse-drawn carriages and feet are the main modes of transport.',
+            temps: { day: '18-22°C', night: '7-13°C', note: 'Weather changes rapidly; high peaks can experience freezing temperatures even in mid-June.' },
+            costs: { flight: '€120 - €220', hotel: '€45 - €85' },
+            flightsUrl: 'https://www.google.com/travel/flights?q=Flights%20from%20BER%20to%20KRK%20on%202026-06-13%20through%202026-06-21'
         }
     ];
 
@@ -351,7 +378,7 @@
         const data = {
             labels: ['Culture', 'Wildness', 'Food'],
             datasets: destinationData.map((dest, index) => {
-                const borders = ['#2F4F4F', '#8FBC8F', '#D2691E', '#4682B4'];
+                const borders = ['#2F4F4F', '#8FBC8F', '#D2691E', '#4682B4', '#CD5C5C'];
                 return { label: dest.shortName, data: [dest.scores.cultural, dest.scores.wildness, dest.scores.food], backgroundColor: 'transparent', borderColor: borders[index], pointBackgroundColor: borders[index], borderWidth: 3, pointRadius: 5 };
             })
         };
@@ -364,7 +391,7 @@
             const card = document.createElement('div');
             card.className = 'bg-white rounded-2xl shadow-sm border-2 border-transparent p-6 cursor-pointer transition-all duration-300 hover:border-accentLight text-center';
             card.dataset.id = dest.id;
-            card.innerHTML = `<div class="text-4xl mb-4">${dest.icon}</div><h3 class="text-xl font-bold text-accentDark mb-1">${dest.shortName}</h3><div class="text-xs font-bold py-1 px-3 rounded-full bg-stone-100 text-stone-500 inline-block mt-4 uppercase tracking-widest">Details &rarr;</div>`;
+            card.innerHTML = `<div class="text-4xl mb-4 text-center">${dest.icon}</div><h3 class="text-xl font-bold text-accentDark mb-1 text-center">${dest.shortName}</h3><div class="text-xs font-bold py-1 px-3 rounded-full bg-stone-100 text-stone-500 inline-block mt-4 uppercase tracking-widest text-center">Details &rarr;</div>`;
             card.addEventListener('click', () => selectDestination(dest.id));
             grid.appendChild(card);
         });
