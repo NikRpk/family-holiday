@@ -17,6 +17,7 @@
                         secondaryText: '#4A5568',
                         accentDark: '#2F4F4F',
                         accentLight: '#8FBC8F',
+                        ratingHigh: '#48BB78',
                     },
                 }
             }
@@ -34,10 +35,10 @@
 <body class="font-sans antialiased text-primaryText min-h-screen">
 
 <!-- Chosen Palette: Warm Neutrals with Slate/Sage Accents -->
-<!-- Application Structure Plan: Interactive explorer for the Röpke family trip. 
-     This version restores the rich textual analysis for physical and cultural categories while 
-     simplifying the climate section to a minimalist icon-based display. 
-     It uses two high-quality user-provided images per location for a focused visual tour. -->
+<!-- Application Structure Plan: Interactive dashboard for the Röpke family. 
+     This version uses "Search Query" formatted Google Flights URLs to force 
+     pre-filled searches for BER flights on June 13-21, 2026. 
+     Maintains the restored descriptive text, 2-image gallery, and 3* hotel split logic. -->
 <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -46,9 +47,9 @@
         <div class="inline-block px-4 py-1 mb-4 rounded-full bg-accentLight/20 text-accentDark text-sm font-bold tracking-widest uppercase">
             Family Holiday Planner 2026
         </div>
-        <h1 class="text-4xl md:text-6xl font-extrabold text-accentDark mb-4 tracking-tight text-center">Röpke Family Getaway</h1>
-        <p class="text-lg md:text-xl text-secondaryText max-w-3xl mx-auto text-center">
-            Reviewing our top wild and active destinations for <span class="text-accentDark font-semibold text-center">June 13th – 21st, 2026</span>.
+        <h1 class="text-4xl md:text-6xl font-extrabold text-accentDark mb-4 tracking-tight">Röpke Family Getaway</h1>
+        <p class="text-lg md:text-xl text-secondaryText max-w-3xl mx-auto">
+            Reviewing our top wild and active destinations for <span class="text-accentDark font-semibold">June 13th – 21st, 2026</span>.
         </p>
     </header>
 
@@ -103,13 +104,13 @@
             <div class="flex flex-col lg:flex-row gap-12">
                 <div class="w-full lg:w-3/5 space-y-10">
                     <div>
-                        <div class="mb-4 border-b-2 border-accentLight/20 pb-4 flex justify-between items-end">
+                        <div class="mb-4 border-b-2 border-accentLight/20 pb-4">
                             <h3 class="text-2xl font-bold text-accentDark">Active Highlights</h3>
                         </div>
                         <p id="detail-phys-text" class="text-lg leading-relaxed text-primaryText mb-6"></p>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div class="bg-stone-50 p-5 rounded-2xl border border-stone-100 shadow-sm">
-                                <span class="block text-xs font-bold text-accentDark uppercase tracking-wider mb-2">Activities</span>
+                                <span class="block text-xs font-bold text-accentDark uppercase tracking-wider mb-2">Must Do</span>
                                 <p id="detail-phys-examples" class="text-sm text-secondaryText leading-snug italic"></p>
                             </div>
                             <div class="bg-stone-50 p-5 rounded-2xl border border-stone-100 shadow-sm">
@@ -137,7 +138,7 @@
                 </div>
 
                 <div class="w-full lg:w-2/5 space-y-8">
-                    <!-- Simplified Climate Card -->
+                    <!-- Climate Card -->
                     <div class="bg-white p-8 rounded-3xl border border-stone-200 shadow-sm">
                         <h3 class="text-xl font-bold text-accentDark mb-6 flex items-center gap-2">
                             <span>🌡️</span> Climate (June)
@@ -155,6 +156,29 @@
                             </div>
                         </div>
                         <p class="text-xs text-secondaryText mt-4 italic text-center" id="temp-note"></p>
+                    </div>
+
+                    <!-- Cost Estimate Card -->
+                    <div class="bg-stone-50 p-8 rounded-3xl border border-stone-200 shadow-sm">
+                        <h3 class="text-xl font-bold text-accentDark mb-6 flex items-center gap-2">
+                            <span>💶</span> Cost Planning
+                        </h3>
+                        <div class="space-y-6">
+                            <div class="pb-4 border-b border-stone-200">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-xs font-bold text-secondaryText uppercase tracking-widest">BER Flight (Sat-Sat)</span>
+                                    <span id="cost-flight-range" class="font-bold text-accentDark"></span>
+                                </div>
+                                <button onclick="openFlights()" id="fetch-btn" class="mt-3 w-full text-[10px] font-bold uppercase tracking-wider bg-accentDark text-white py-3 rounded-xl hover:bg-opacity-90 transition-all flex items-center justify-center gap-2">
+                                    Search Live on Google Flights
+                                </button>
+                            </div>
+                            <div class="flex justify-between items-center pb-1">
+                                <span class="text-xs font-bold text-secondaryText uppercase tracking-widest">Hotel (Per Person / Day)</span>
+                                <span id="cost-hotel-range" class="font-bold text-accentDark"></span>
+                            </div>
+                        </div>
+                        <p class="text-[9px] text-secondaryText mt-6 leading-tight italic text-center">Hotel rates based on 3* double room split. Flight includes 1 bag.</p>
                     </div>
 
                     <div class="bg-accentDark p-8 rounded-3xl text-white shadow-xl">
@@ -184,7 +208,7 @@
                     &larr; Previous Destination
                 </button>
                 <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="text-secondaryText text-sm font-bold uppercase tracking-widest hover:text-accentDark transition-colors">
-                    Back to Grid
+                    Back to Selection
                 </button>
                 <button onclick="changeDestination(1)" class="w-full md:w-auto px-8 py-4 rounded-2xl bg-accentDark text-white font-bold hover:bg-stone-800 shadow-lg flex items-center justify-center gap-2">
                     Next Destination &rarr;
@@ -212,18 +236,20 @@
                 'https://www.visit-azoren.de/wp-content/uploads/2024/01/Sao-Miguel6.jpg'
             ],
             physical: { 
-                text: 'The island is a natural playground. Start with canyoning in Ribeira dos Caldeirões (rappelling down waterfalls), move to whale watching out of Ponta Delgada, and end with a volcanic trek around Sete Cidades. The landscape is steep, lush, and constantly changing.', 
+                text: 'The island is a natural playground. Start with canyoning in Ribeira dos Caldeirões (rappelling down waterfalls into pools), move to whale watching out of Ponta Delgada (June is peak season), and end with a volcanic trek around Sete Cidades.', 
                 examples: 'Kayaking Twin Lakes, surfing Ribeira Grande, trekking Praia da Viola.', 
-                local: 'The Terra Nostra thermal baths: warm, iron-rich waters in a 200-year-old jungle garden.' 
+                local: 'The Terra Nostra thermal baths: warm, iron-rich waters in a 200-year-old tropical botanical garden.' 
             },
             cultural: { 
-                text: '2026 is the 50th Anniversary of Regional Autonomy. Mid-June is exceptionally festive with "Sanjoaninas" street parades, traditional folk music, and communal feasts.', 
-                extra: 'Visit the Gorreana Tea Factory—Europe\'s only commercial tea plantation—to see 19th-century machinery still in use.' 
+                text: '2026 is the 50th Anniversary of Azorean Autonomy. Mid-June is exceptionally festive with "Sanjoaninas" street parades, traditional folk music, and massive communal "Holy Spirit" feasts.', 
+                extra: 'Visit the Gorreana Tea Factory—Europe\'s only commercial tea plantation—to see 19th-century machinery still powered by mountain water.' 
             },
-            food: 'Defined by Cozido (volcanic-steamed stew buried in the ground), grilled limpets, and world-class grass-fed cheeses.',
-            tourism: { text: 'Moderately wild. Towns will be festive for the 2026 anniversary, but mountain trails remain remarkably secluded.' },
+            food: 'Defined by Cozido (volcanic-steamed stew buried in the ground), grilled limpets (Lapas), and world-class grass-fed island cheeses.',
+            tourism: { text: 'Moderately wild. Towns will be festive for the anniversary, but mountain trails remain secluded.' },
             transport: 'Strongly recommended: Rental Car. Essential for reaching remote crater lakes and jungle baths.',
-            temps: { day: '20-23°C', night: '15-17°C', note: 'Famous for "4 seasons in a day." Expect mist and sun in equal measure.' }
+            temps: { day: '20-23°C', night: '15-17°C', note: 'Famous for "4 seasons in a day." Expect humidity and light rain.' },
+            costs: { flight: '€420 - €580', hotel: '€55 - €80' },
+            flightsUrl: 'https://www.google.com/travel/flights?q=Flights%20from%20BER%20to%20PDL%20on%202026-06-13%20through%202026-06-21'
         },
         {
             id: 'montenegro',
@@ -237,18 +263,20 @@
                 'https://i0.wp.com/brosaroundtheglobe.com/wp-content/uploads/2024/04/kotor-summer-europe-travel-scaled.jpg?fit=2560,1920&ssl=1'
             ],
             physical: { 
-                text: 'Extreme variety. High-speed rafting in the Tara River Canyon (Europe\'s deepest) contrasts with technical Via Ferratas in Kotor. The "Peaks of the Balkans" offers rugged, unmanicured trails for pure wilderness exploration.', 
+                text: 'Extreme variety. High-speed rafting in the Tara River Canyon (Europe\'s deepest) contrasts with technical Via Ferratas in Kotor overlooking the fjord. The "Peaks of the Balkans" offers rugged trails for pure exploration.', 
                 examples: 'Canyoning in Nevidio, mountain biking the Durmitor Ring, sea kayaking Perast.', 
-                local: 'Blue Eye hike: trek to deep, icy-cold karst springs for a "wild swim" in the Accursed Mountains.' 
+                local: 'Blue Eye hike: trek to deep, icy-cold karst springs for a "wild swim" in the heart of the Accursed Mountains.' 
             },
             cultural: { 
-                text: 'A mix of Venetian coastal elegance and rugged highland shepherd traditions. Spend mornings in UNESCO Old Towns and evenings in a "Katun" learning about ancient honor codes.', 
-                extra: 'Visit Ostrog Monastery—a 17th-century holy site carved entirely into a vertical cliff wall overlooking the Zeta valley.' 
+                text: 'A mix of Venetian coastal elegance and rugged highland shepherd traditions. Spend mornings in UNESCO Old Towns and evenings in a "Katun" learning ancient mountain hospitality codes.', 
+                extra: 'Visit Ostrog Monastery—a holy site carved entirely into a vertical cliff wall overlooking the vast Zeta valley.' 
             },
             food: 'Contrast between coastal black ink risotto and highland clotted cream (Kaymak) with slow-roasted mountain lamb.',
-            tourism: { text: 'Very wild in the north. Kotor is busy, but Durmitor remains one of the quietest mountain ranges in Europe.' },
+            tourism: { text: 'Very wild in the north. Kotor is busy, but northern national parks remain blissfully quiet.' },
             transport: 'A 4x4 vehicle is best for navigating mountain passes and unpaved gravel tracks in Durmitor.',
-            temps: { day: '24-28°C', night: '15-22°C', note: 'Significant drop in temperature when moving from the coast to the northern mountains.' }
+            temps: { day: '24-28°C', night: '15-22°C', note: 'Significant drop in temperature when moving from the sunny coast to the peaks.' },
+            costs: { flight: '€280 - €410', hotel: '€35 - €55' },
+            flightsUrl: 'https://www.google.com/travel/flights?q=Flights%20from%20BER%20to%20TIV%20on%202026-06-13%20through%202026-06-21'
         },
         {
             id: 'dolomites',
@@ -262,18 +290,20 @@
                 'https://travelandspa.it/wp-content/uploads/2023/07/Tre-Cime-strada-nicola-bombassei-1750-1024x684.jpg'
             ],
             physical: { 
-                text: 'World capital of Via Ferrata. Scale massive vertical faces with ladders and cables. E-Mountain Biking is unmatched, with the Sella Ronda loop offering 58km of epic trails through high-speed gondola access.', 
-                examples: 'Seceda Ridgeline hike, Brigata Tridentina climb, Alpe di Siusi trail running.', 
-                local: 'Take the first cable car to Seceda at 8:00 AM to experience the "shark teeth" peaks in total silence.' 
+                text: 'World capital of Via Ferrata. Scale massive vertical faces with ladders and cables. E-Mountain Biking is unmatched, with the Sella Ronda loop offering 58km of trails via high-speed gondola access.', 
+                examples: 'Hiking the Seceda Ridgeline, climbing Brigata Tridentina, trail running on Alpe di Siusi.', 
+                local: 'First cable car to Seceda at 8:00 AM allows you to experience the "shark teeth" peaks in total silence.' 
             },
             cultural: { 
-                text: 'Ladin heritage (a unique language) meets Tyrolean heartiness. Mid-June hosts the HERO Dolomites race, turning villages into festive mountain hubs.', 
-                extra: 'Rifugio culture: Lunching at 2,000m huts is a pillar of life here—expect Michelin-quality food in hiking boots.' 
+                text: 'Ladin heritage (a unique language) meets Tyrolean heartiness. Mid-June hosts the HERO Dolomites race, turning mountain villages into electric festive hubs.', 
+                extra: 'Rifugio culture: Lunching at 2,000m huts is a daily ritual—expect Michelin-quality food in hiking boots.' 
             },
-            food: 'High-end fusion of Austrian dumplings (Canederli) and Italian refinement; focused on local Speck and aged Alpine cheeses.',
+            food: 'High-end fusion of Austrian dumplings (Canederli) and Italian refinement; focused on local Speck and aged cheeses.',
             tourism: { text: 'Managed wild. World-class infrastructure keeps trails feeling spacious even when villages are lively.' },
-            transport: 'Public transport winner. Efficient trains and buses make cars unnecessary with the Südtirol Mobil card.',
-            temps: { day: '20-25°C', night: '8-15°C', note: 'Peak temperatures can stay quite cold; expect leftover winter snow in high-altitude crevices.' }
+            transport: 'Public transport winner. Efficient trains and buses make cars unnecessary with the Mobil card.',
+            temps: { day: '20-25°C', night: '8-15°C', note: 'Valleys are warm; high peaks can see leftover winter snow.' },
+            costs: { flight: '€180 - €320', hotel: '€65 - €95' },
+            flightsUrl: 'https://www.google.com/travel/flights?q=Flights%20from%20BER%20to%20INN%20on%202026-06-13%20through%202026-06-21'
         },
         {
             id: 'corsica',
@@ -287,18 +317,20 @@
                 'https://cdn.britannica.com/05/65205-050-6458CBA2/Mountains-Corsica-town-Montemaggiore-France-terrain.jpg'
             ],
             physical: { 
-                text: 'Home to the GR20, Europe\'s toughest trek. Hike segments of the granite spine or kayak the red-rock Scandola Reserve, accessible only by water. River trekking in the Restonica valley involves swimming in glacial pools.', 
-                examples: 'Diving Lavezzi Islands, canyoning Bavella Needles, coastal hiking Genovese towers.', 
-                local: 'River scrambling: Scramble up the Restonica Valley jumping into deep glacial "rock baths" only found in the interior.' 
+                text: 'Home to the GR20, Europe\'s toughest trek. Hike segments of the granite spine or kayak the red-rock Scandola Reserve, accessible only by water.', 
+                examples: 'Diving Lavezzi Islands, canyoning Bavella Needles, hiking Genovese towers.', 
+                local: 'River scrambling: Scramble up the Restonica Valley jumping into crystal glacial rock baths found in the interior.' 
             },
             cultural: { 
-                text: 'Fiercely independent spirit. Experience polyphonic singing (haunting A Cappella) and the "Fête de la Saint-Jean" beach bonfires on June 20th.', 
-                extra: 'The "Maquis"—a wild shrubland of rosemary, myrtle, and thyme—scents the entire island during the June heat.' 
+                text: 'Fiercely independent spirit. Experience polyphonic singing (A Cappella) and the "Fête de la Saint-Jean" beach bonfires on June 20th.', 
+                extra: 'The "Maquis"—the wild shrubland of rosemary and myrtle—scents the entire island during the heat.' 
             },
-            food: 'Rustic and wild. Chestnut-fed free-roaming pigs result in world-class charcuterie and unique chestnut-flour beers.',
+            food: 'Rustic and wild. Chestnut-fed free-roaming pigs result in world-class charcuterie and chestnut-flour beers.',
             tourism: { text: 'Ruggedly wild. Interior Corsica remains ancient and slow-paced even as the coast prepares for July.' },
-            transport: 'Rental car mandatory. Winding "Corniche" roads are a white-knuckle, scenic activity in themselves.',
-            temps: { day: '23-27°C', night: '12-20°C', note: 'Coastal weather is perfect Mediterranean summer; interior granite mountains can see quick storms.' }
+            transport: 'Rental car mandatory. Winding "Corniche" roads are scenic activity in themselves.',
+            temps: { day: '23-27°C', night: '12-20°C', note: 'Mediterranean coast weather vs interior mountains which see quick storms.' },
+            costs: { flight: '€310 - €460', hotel: '€50 - €75' },
+            flightsUrl: 'https://www.google.com/travel/flights?q=Flights%20from%20BER%20to%20BIA%20on%202026-06-13%20through%202026-06-21'
         }
     ];
 
@@ -306,6 +338,13 @@
     let currentImageIndex = 0;
     let currentDestinationImages = [];
     let currentDestId = null;
+
+    function openFlights() {
+        const dest = destinationData.find(d => d.id === currentDestId);
+        if (dest && dest.flightsUrl) {
+            window.open(dest.flightsUrl, '_blank');
+        }
+    }
 
     function initRadarChart() {
         const ctx = document.getElementById('comparisonChart').getContext('2d');
@@ -325,7 +364,7 @@
             const card = document.createElement('div');
             card.className = 'bg-white rounded-2xl shadow-sm border-2 border-transparent p-6 cursor-pointer transition-all duration-300 hover:border-accentLight text-center';
             card.dataset.id = dest.id;
-            card.innerHTML = `<div class="text-4xl mb-4">${dest.icon}</div><h3 class="text-xl font-bold text-accentDark mb-1">${dest.shortName}</h3><p class="text-xs text-secondaryText mb-6 uppercase tracking-widest font-bold">Mid-June Outlook</p><div class="text-xs font-bold py-1 px-2 rounded-full bg-stone-100 text-stone-500 inline-block">Explore &rarr;</div>`;
+            card.innerHTML = `<div class="text-4xl mb-4">${dest.icon}</div><h3 class="text-xl font-bold text-accentDark mb-1">${dest.shortName}</h3><div class="text-xs font-bold py-1 px-3 rounded-full bg-stone-100 text-stone-500 inline-block mt-4 uppercase tracking-widest">Details &rarr;</div>`;
             card.addEventListener('click', () => selectDestination(dest.id));
             grid.appendChild(card);
         });
@@ -356,10 +395,12 @@
         document.getElementById('detail-tour-text').textContent = dest.tourism.text;
         document.getElementById('detail-transport').textContent = dest.transport;
 
-        // Update Climate Fields
         document.getElementById('temp-day').textContent = dest.temps.day;
         document.getElementById('temp-night').textContent = dest.temps.night;
         document.getElementById('temp-note').textContent = dest.temps.note;
+
+        document.getElementById('cost-flight-range').textContent = dest.costs.flight;
+        document.getElementById('cost-hotel-range').textContent = dest.costs.hotel;
 
         updateGallery();
         window.scrollTo({ top: document.getElementById('detail-section').offsetTop - 20, behavior: 'smooth' });
@@ -374,8 +415,8 @@
         document.getElementById('gallery-total').textContent = currentDestinationImages.length;
     }
 
-    function nextImage(e) { if(e) e.stopPropagation(); currentImageIndex = (currentImageIndex + 1) % currentDestinationImages.length; updateGallery(); }
-    function prevImage(e) { if(e) e.stopPropagation(); currentImageIndex = (currentImageIndex - 1 + currentDestinationImages.length) % currentDestinationImages.length; updateGallery(); }
+    function nextImage(e) { if(e) e.stopPropagation(); currentImageIndex = (currentImageIndex + 1) % 2; updateGallery(); }
+    function prevImage(e) { if(e) e.stopPropagation(); currentImageIndex = (currentImageIndex - 1 + 2) % 2; updateGallery(); }
 
     function changeDestination(direction) {
         const currentIndex = destinationData.findIndex(d => d.id === currentDestId);
