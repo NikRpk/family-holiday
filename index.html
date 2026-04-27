@@ -36,19 +36,19 @@
 
 <!-- Chosen Palette: Warm Neutrals with Slate/Sage Accents -->
 <!-- Application Structure Plan: Interactive dashboard for the Röpke family. 
-     This version includes 5 destinations (adding High Tatras, Poland).
-     It uses "Search Query" formatted Google Flights URLs for pre-filled searches.
-     Maintains the restored descriptive text, 2-image gallery, and 3* hotel split logic. -->
+     This version includes 5 destinations, featuring the newly added High Tatras images.
+     The UI maintains the minimalist climate field, restored long-form narrative, 
+     and per-person hotel split logic (3* Double room / 2). -->
 <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
     
     <header class="mb-12 text-center">
-        <div class="inline-block px-4 py-1 mb-4 rounded-full bg-accentLight/20 text-accentDark text-sm font-bold tracking-widest uppercase text-center">
+        <div class="inline-block px-4 py-1 mb-4 rounded-full bg-accentLight/20 text-accentDark text-sm font-bold tracking-widest uppercase">
             Family Holiday Planner 2026
         </div>
-        <h1 class="text-4xl md:text-6xl font-extrabold text-accentDark mb-4 tracking-tight text-center">Röpke Family Getaway</h1>
-        <p class="text-lg md:text-xl text-secondaryText max-w-3xl mx-auto text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-accentDark mb-4 tracking-tight">Röpke Family Getaway</h1>
+        <p class="text-lg md:text-xl text-secondaryText max-w-3xl mx-auto">
             Reviewing our top wild and active destinations for <span class="text-accentDark font-semibold">June 13th – 21st, 2026</span>.
         </p>
     </header>
@@ -56,7 +56,7 @@
     <section class="mb-16 bg-neutralCard rounded-3xl shadow-sm p-6 md:p-10 border border-gray-200">
         <div class="mb-8 text-center">
             <h2 class="text-2xl font-bold text-accentDark">Comparison Overview</h2>
-            <p class="text-secondaryText mt-2 text-center">Check the balance of Culture, Wildness, and Food for our top picks.</p>
+            <p class="text-secondaryText mt-2">Check the balance of Culture, Wildness, and Food for our top picks.</p>
         </div>
         <div class="radar-container">
             <canvas id="comparisonChart"></canvas>
@@ -129,7 +129,7 @@
                     </div>
 
                     <div class="p-6 bg-orange-50/30 rounded-2xl border border-orange-100">
-                        <div class="flex items-center gap-3 mb-2 text-orange-800">
+                        <div class="flex items-center gap-3 mb-3 text-orange-800">
                             <span class="text-2xl">🍲</span>
                             <h3 class="text-xl font-bold">Food Scene</h3>
                         </div>
@@ -164,8 +164,8 @@
                             <span>💶</span> Cost Planning
                         </h3>
                         <div class="space-y-6">
-                            <div class="pb-4 border-b border-stone-200">
-                                <div class="flex justify-between items-center mb-1 text-center">
+                            <div class="pb-4 border-b border-stone-200 text-center">
+                                <div class="flex justify-between items-center mb-1">
                                     <span class="text-xs font-bold text-secondaryText uppercase tracking-widest">BER Flight (Sat-Sat)</span>
                                     <span id="cost-flight-range" class="font-bold text-accentDark text-right"></span>
                                 </div>
@@ -236,13 +236,13 @@
                 'https://www.visit-azoren.de/wp-content/uploads/2024/01/Sao-Miguel6.jpg'
             ],
             physical: { 
-                text: 'The island is a natural playground. Start with canyoning in Ribeira dos Caldeirões (rappelling down waterfalls into pools), move to whale watching out of Ponta Delgada (June is peak season), and end with a volcanic trek around Sete Cidades. The landscape is steep, lush, and constantly changing.', 
+                text: 'The island is a natural playground. Start with canyoning in Ribeira dos Caldeirões (rappelling down waterfalls into pools), move to whale watching out of Ponta Delgada (June is peak season), and end with a volcanic trek around Sete Cidades.', 
                 examples: 'Kayaking Twin Lakes, surfing Ribeira Grande, trekking Praia da Viola.', 
                 local: 'The Terra Nostra thermal baths: warm, iron-rich waters in a 200-year-old tropical botanical garden.' 
             },
             cultural: { 
                 text: '2026 is the 50th Anniversary of Azorean Autonomy. Mid-June is exceptionally festive with "Sanjoaninas" street parades, traditional folk music, and massive communal "Holy Spirit" feasts.', 
-                extra: 'Visit the Gorreana Tea Factory—Europe\'s only commercial tea plantation—to see 19th-century machinery still in use.' 
+                extra: 'Visit the Gorreana Tea Factory—Europe\'s only commercial tea plantation—to see 19th-century machinery still powered by mountain water.' 
             },
             food: 'Defined by Cozido (volcanic-steamed stew buried in the ground), grilled limpets (Lapas), and world-class grass-fed island cheeses.',
             tourism: { text: 'Moderately wild. Towns will be festive for the anniversary, but mountain trails remain remarkably secluded.' },
@@ -317,7 +317,7 @@
                 'https://cdn.britannica.com/05/65205-050-6458CBA2/Mountains-Corsica-town-Montemaggiore-France-terrain.jpg'
             ],
             physical: { 
-                text: 'Home to the GR20, Europe\'s toughest trek. Hike segments of the granite spine or kayak the red-rock Scandola Reserve, accessible only by water.', 
+                text: 'Home to the GR20, Europe\'s toughest trek. Hike segments of the granite spine or kayak the red-rock Scandola Reserve, only accessible by water. River trekking involves scrambling over boulders into glacial pools.', 
                 examples: 'Diving Lavezzi Islands, canyoning Bavella Needles, hiking Genovese towers.', 
                 local: 'River scrambling: Scramble up the Restonica Valley jumping into crystal glacial rock baths found in the interior.' 
             },
@@ -340,8 +340,8 @@
             vibe: 'Jagged granite peaks, emerald lakes, and rich highlander folklore.',
             scores: { physical: 9, cultural: 9, food: 8, wildness: 6 },
             images: [
-                'https://images.unsplash.com/photo-1579624505199-5f2ca030d315?auto=format&fit=crop&q=80&w=1200',
-                'https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?auto=format&fit=crop&q=80&w=1200'
+                'https://stunningoutdoors.com/wp-content/uploads/2019/06/guide-to-zakopane-and-tatra.png',
+                'https://i.redd.it/cra3novinna31.jpg'
             ],
             physical: { 
                 text: 'Poland\'s only alpine-style mountain range. Scale the granite spires of the High Tatras or explore the limestone caves of the Western Tatras. The trails are steep, rugged, and well-marked, leading to some of the most beautiful glacial lakes in Europe.', 
@@ -387,6 +387,7 @@
 
     function renderCards() {
         const grid = document.getElementById('destination-grid');
+        grid.innerHTML = ""; // Clear existing
         destinationData.forEach(dest => {
             const card = document.createElement('div');
             card.className = 'bg-white rounded-2xl shadow-sm border-2 border-transparent p-6 cursor-pointer transition-all duration-300 hover:border-accentLight text-center';
